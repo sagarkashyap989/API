@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://dbuser:sagar@cluster0.sct3m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://dbuser:dbuser@marketplace.siclh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {useNewUrlParser: true});
 
 const articleSchema = {
   text:   String  ,
