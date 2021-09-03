@@ -136,6 +136,6 @@ app.route("/articles/:articleTitle")
 
 const port = process.env.PORT || 3000
 
-app.listen(port, function() {
+app.listen(process.env.PORT, function() {
   console.log("Server started on port 3000");
 });
