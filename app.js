@@ -14,10 +14,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://dbuser:dbuser@marketplace.siclh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/", {useNewUrlParser: true});
 
 const articleSchema = {
-  text:   String  ,
+  username:   String  ,
     custom:   String  ,
     number:   Number  ,
     // custom: req.body.custom,
@@ -46,7 +46,7 @@ app.route("/articles")
 .post(function(req, res){
 
   const newArticle = new Article({
-    text: req.body.text,
+    username: req.body.text,
     custom: req.body.custom,
     number: req.body.number,
     // custom: req.body.custom,
@@ -78,11 +78,12 @@ app.route("/articles")
 
 ////////////////////////////////Requests Targetting A Specific Article////////////////////////
 
-app.route("/articles/:articleTitle")
+app.route("/articles/:Username")
 
 .get(function(req, res){
 
-  Article.findOne({title: req.params.articleTitle}, function(err, foundArticle){
+  Article.findOne({username: req.params.Username}, function(err, foundArticle){
+    console.log(req.params.Username);
     if (foundArticle) {
       res.send(foundArticle);
     } else {
@@ -94,7 +95,7 @@ app.route("/articles/:articleTitle")
 .put(function(req, res){
 
   Article.update(
-    {title: req.params.articleTitle},
+    {username: req.params.username},
     {title: req.body.title, content: req.body.content},
     {overwrite: true},
     function(err){
@@ -108,7 +109,7 @@ app.route("/articles/:articleTitle")
 .patch(function(req, res){
 
   Article.update(
-    {title: req.params.articleTitle},
+    {title: req.params.username},
     {$set: req.body},
     function(err){
       if(!err){
@@ -123,7 +124,7 @@ app.route("/articles/:articleTitle")
 .delete(function(req, res){
 
   Article.deleteOne(
-    {title: req.params.articleTitle},
+    {title: req.params.username},
     function(err){
       if (!err){
         res.send("Successfully deleted the corresponding article.");
