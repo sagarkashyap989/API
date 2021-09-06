@@ -28,7 +28,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect("mongodb+srv://dbuser:dbuser@marketplace.siclh.mongodb.net/userDB?retryWrites=true&w=majority", {useNewUrlParser: true});
-// mongoose.set("useCreateIndex", true);
+mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema ({
   username: String,
@@ -36,29 +36,10 @@ const userSchema = new mongoose.Schema ({
   googleId: String
 });
 
-const articleSchema = {
-    username:   String  ,
-      custom:   String  ,
-      number:   Number  ,
-      // custom: req.body.custom,
-      email:   String  ,
-      // custom: req.body.custom,
-      date:   String  ,
-      account_type:   String
-  };
-  
-
-
-
-
-
-
-
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
 
 const User = new mongoose.model("User", userSchema);
-const Article = mongoose.model("Article", articleSchema);
 
 passport.use(User.createStrategy());
 
@@ -123,15 +104,6 @@ app.get("/logout", function(req, res){
   res.redirect("/");
 });
 
-app.get("/", function(req, res){
-
-    res.render("home");
-   });
-   
-   
-
-    
-
 app.post("/register", function(req, res){
 
   User.register({username: req.body.username}, req.body.password, function(err, user){
@@ -168,108 +140,7 @@ app.post("/login", function(req, res){
 
 
 
-app.route("/articles")
 
-.get(function(req, res){
-  Article.find(function(err, foundArticles){
-    if (!err) {
-      res.send(foundArticles);
-    } else {
-      res.send(err);
-    }
-  });
-})
-
-.post(function(req, res){
-
-  const newArticle = new Article({
-    username: req.body.username,
-    custom: req.body.custom,
-    number: req.body.number,
-    // custom: req.body.custom,
-    email: req.body.email,
-    // custom: req.body.custom,
-    date: req.body.date,
-    account_type: req.body.account_type
-  });
-
-  newArticle.save(function(err){
-    if (!err){
-      res.send("Successfully added a new article.");
-    } else {
-      res.send(err);
-    }
-  });
-})
-
-.delete(function(req, res){
-
-  Article.deleteMany(function(err){
-    if (!err){
-      res.send("Successfully deleted all articles.");
-    } else {
-      res.send(err);
-    }
-  });
-});
-
-////////////////////////////////Requests Targetting A Specific Article////////////////////////
-
-app.route("/articles/:Username")
-
-.get(function(req, res){
-
-  Article.findOne({username: req.params.Username}, function(err, foundArticle){
-    console.log(req.params.Username);
-    if (foundArticle) {
-      res.send(foundArticle);
-    } else {
-      res.send("No articles matching that title was found.");
-    }
-  });
-})
-
-// .put(function(req, res){
-
-//   Article.update(
-//     {username: req.params.username},
-//     {overwrite: true},
-//     function(err){
-//       if(!err){
-//         res.send("Successfully updated the selected article.");
-//       }
-//     }
-//   );
-// })
-
-.patch(function(req, res){
-
-  Article.update(
-    {username: req.params.Username},
-    {$set: req.body},
-    function(err){
-      if(!err){
-        res.send("Successfully updated article.");
-      } else {
-        res.send(err);
-      }
-    }
-  );
-})
-
-.delete(function(req, res){
-
-  Article.deleteOne(
-    {username: req.params.Username},
-    function(err){
-      if (!err){
-        res.send("Successfully deleted the corresponding article.");
-      } else {
-        res.send(err);
-      }
-    }
-  );
-});
 
 
 

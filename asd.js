@@ -28,7 +28,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect("mongodb+srv://dbuser:dbuser@marketplace.siclh.mongodb.net/userDB?retryWrites=true&w=majority", {useNewUrlParser: true});
-// mongoose.set("useCreateIndex", true);
+mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema ({
   username: String,
