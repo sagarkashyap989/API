@@ -4,6 +4,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
+const routers = require('./routers/routes');
+const Schema = require("./schema/userSchema.js");
 const session = require('express-session');
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
@@ -30,22 +32,6 @@ app.use(passport.session());
 mongoose.connect("mongodb+srv://dbuser:dbuser@marketplace.siclh.mongodb.net/userDB?retryWrites=true&w=majority", {useNewUrlParser: true});
 // mongoose.set("useCreateIndex", true);
 
-const userSchema = new mongoose.Schema ({
-  username: String,
-  password: String,
-  googleId: String
-});
-
-const articleSchema = {
-    username:   String  ,
-      custom:   String  ,
-      number:   Number  ,
-      // custom: req.body.custom,
-      email:   String  ,
-      // custom: req.body.custom,
-      date:   String  ,
-      account_type:   String
-  };
   
 
 
@@ -54,11 +40,11 @@ const articleSchema = {
 
 
 
-userSchema.plugin(passportLocalMongoose);
-userSchema.plugin(findOrCreate);
+Schema.userSchema.plugin(passportLocalMongoose);
+Schema.userSchema.plugin(findOrCreate);
 
-const User = new mongoose.model("User", userSchema);
-const Article = mongoose.model("Article", articleSchema);
+const User = new mongoose.model("User", Schema.userSchema);
+const Article = mongoose.model("Article", Schema.articleSchema);
 
 passport.use(User.createStrategy());
 
@@ -87,84 +73,14 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-app.get("/", function(req, res){
-  res.render("login");
-});
 
-app.get("/auth/google",
-  passport.authenticate('google', { scope: ["profile"] })
-);
+app.use(routers)
 
-app.get("/auth/google/success",
-  passport.authenticate('google', { failureRedirect: "/login" }),
-  function(req, res) {
-    // Successful authentication, redirect to success.
-    res.redirect("/success");
-  });
 
-app.get("/login", function(req, res){
-  res.render("login");
-});
 
-app.get("/register", function(req, res){
-  res.render("register");
-});
 
-app.get("/success", function(req, res){
-  if (req.isAuthenticated()){
-    res.render("success");
-  } else {
-    res.redirect("/login");
-  }
-});
-
-app.get("/logout", function(req, res){
-  req.logout();
-  res.redirect("/");
-});
-
-app.get("/", function(req, res){
-
-    res.render("home");
-   });
-   
-   
-
-    
-
-app.post("/register", function(req, res){
-
-  User.register({username: req.body.username}, req.body.password, function(err, user){
-    if (err) {
-      console.log(err);
-      res.redirect("/register");
-    } else {
-      passport.authenticate("local")(req, res, function(){
-        res.redirect("/success");
-      });
-    }
-  });
-
-});
-
-app.post("/login", function(req, res){
-
-  const user = new User({
-    username: req.body.username,
-    password: req.body.password
-  });
-
-  req.login(user, function(err){
-    if (err) {
-      console.log(err);
-    } else {
-      passport.authenticate("local")(req, res, function(){
-        res.redirect("/success");
-      });
-    }
-  });
-
-});
+// app.get("/", function(req, res){
+// });
 
 
 
