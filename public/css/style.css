@@ -1,3 +1,14 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin: 0 0 100px;
+  /* bottom = footer height */
+  padding: 25px;
+}
+
+
 
 .content{   
     border: 1px solid black;
@@ -45,7 +56,7 @@ img {
      color:black;
  }
  a {
-   color: #59B4E6;
+   color: #ffffff;
    text-decoration: none;
  }
 .fa{
@@ -68,9 +79,208 @@ img {
   transform: translate(0, -3px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-/* ////////////home page end/////////// */
+
+
+.hm-gradient {
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+}
+.navbar .dropdown-menu a:hover {
+  color: #616161 !important;
+}
+.darken-grey-text {
+  color: #2E2E2E;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.customPadding{
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color: #1C2331;
+}
+
+/* .sub-title{
+  color: #E5E4E2;
+} */
+
+/* .animated_rainbow_1 {
+  font-size: 42px;
+  font-family: Arial Black, Gadget, sans-serif;
+  background-image: -webkit-linear-gradient(left, #f00, #ff2b00, #f50, #ff8000, #fa0, #ffd500, #ff0, #d4ff00, #af0, #80ff00, #5f0, #2bff00, #0f0, #00ff2a, #0f5, #00ff80, #0fa, #00ffd5, #0ff, #00d5ff, #0af, #0080ff, #05f, #002aff, #00f, #2b00ff, #50f, #8000ff, #a0f, #d400ff, #f0f, #ff00d4, #f0a, #ff0080, #f05, #ff002b, #f00);
+  -webkit-animation: animatedBackground_a 5s linear infinite alternate;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #0000;
+  background-clip: text;
+}
+@keyframes animatedBackground_a {
+  0% { background-position: 0 0 }
+  100% { background-position: -500px 0 }
+} */
+
+.css-christmas-color {
+    background: linear-gradient(120deg, #2836d1bd, #2f35e4, #e122e7, #550336);
+    color: #0000;
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* font-size: 50px; */
+    /* font-weight: bold; */
+    display: inline-block;
+}
+
+
+
+.footer{
+  /* position: fixed; */
+ 
+  /* background: #263238;
+  text-align: center;
+  color: white;
+  height: 60px;
+  position: ;
+  bottom: 0px;
+  left: 0px;
+  line-height: 50px;
+  color: #aaa;
+  text-align: center;
+  width: 100%; */
+  /* scroll-padding: ; */
+     background-color: #263238;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 120px;
+    width: 100%;
+    overflow:hidden;
+    margin-top: 90px;
+    /* padding-bottom: 20px;
+    margin-bottom: 20px; */
+}
+
+
+
+.icons{
+  text-decoration: none;
+  font-size: 1.6rem;
+  margin: 0.5rem;
+  color: #f4f4f4;
+  /* border: #f4f4f4 solid;
+  border-radius: 25%;
+  */
+}
+
+
+
+/* @media (max-width: 500px){
+  html{
+      font-size: 50%;
+  }
+}    
+@media(min-width: 501px) and (max-width: 768px){
+  html{
+  font-size: 50%;
+  }
+}     */
+
+
+
+
+.autohide{
+  position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+}
+
+.scrolled-down{
+  transform:translateY(-100%); transition: all 0.3s ease-in-out;
+}
+.scrolled-up{
+  transform:translateY(0); transition: all 0.3s ease-in-out;
+}
 
 
 
 
 
+
+                                  /* for login page */
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+
+.container{
+height: 100%;
+align-content: center;
+}
+
+.card{
+height: 370px;
+margin-top: auto;
+margin-bottom: auto;
+width: 400px;
+background-color: rgba(0,0,0,0.5) !important;
+}
+
+
+
+
+.card-header h3{
+color: white;
+}
+
+
+
+.input-group-prepend span{
+width: 50px;
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+
+}
+
+.remember{
+color: white;
+}
+
+.remember input
+{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+margin-right: 5px;
+}
+
+.login_btn{
+color: black;
+background-color: #1C2331;
+width: 100px;
+}
+
+.login_btn:hover{
+color: black;
+background-color: #25334e;
+}
+
+.links{
+color: white;
+}
+
+.links a{
+margin-left: 4px;
+}
+
+
+#spacing{
+  margin:30px;
+}
